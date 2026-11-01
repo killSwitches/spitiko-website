@@ -1,62 +1,49 @@
-# Spitiko Restaurant & Stay Website
+# Spitiko Customer App
 
-The public website is the Spitiko restaurant storefront: guests can browse the
-live menu, filter dishes by category, build a cart, and send an order to the
-restaurant through WhatsApp. Table reservation requests also open WhatsApp for
-staff confirmation. The existing Ora Lodge stay pages and their booking flow
-remain available under **Stay**; saved room requests are not confirmed until
-staff updates their status.
+The Spitiko customer app provides the restaurant menu, categories, dish details,
+featured items, a shopping cart, WhatsApp order handoff, and table reservations
+through the existing WhatsApp request flow. Menu items and the restaurant
+WhatsApp number are read from Firebase in real time; staff manage them in the
+Spitiko Admin app.
 
 ## Setup
 
-Run these commands from the repository root:
+Install dependencies in this directory and configure the public Firebase web
+app values in `.env`:
 
 ```sh
 npm install
-cp website/.env.example website/.env
+cp .env.example .env
 ```
 
-Set the six `EXPO_PUBLIC_FIREBASE_*` values in `website/.env` from the Firebase
-project's web app configuration. These values are public client configuration
-and are embedded in the site bundle; never put service-account credentials or
-other privileged secrets in this file. Set `EXPO_PUBLIC_USE_FIREBASE_EMULATORS`
-to `true` only when using the Emulator Suite. The emulator host must be
-reachable from the browser.
+Set the `EXPO_PUBLIC_FIREBASE_*` values from the Firebase web app configuration.
+These client values are embedded in the app bundle; never put service-account
+credentials or other privileged secrets in `.env`. Set
+`EXPO_PUBLIC_USE_FIREBASE_EMULATORS=true` only when using the Emulator Suite.
 
-Start the web app locally:
+## Development and build
 
 ```sh
-npm run start:web
+npm run web
+npm run typecheck
+npm run build
 ```
 
-Expo Router screens and the root stack are in `website/app/`; screen
-styles are colocated with their components.
+The static web export is written to `dist/`. Deploy that output to the chosen
+static host and configure direct route requests to fall back to `index.html`.
+Vercel settings are in `vercel.json`.
 
-Build a static site export to `website/dist`:
+The app uses Expo SDK 58. To align Expo packages with the SDK after changing
+dependencies, run `npx expo install --fix` from this directory.
 
-```sh
-npm run build:web
-```
+## Firebase data
 
-## Hosting
+- `menuItems/{itemId}` stores dishes and products. The customer app only shows
+  items whose `available` field is `true`.
+- `config/whatsapp` stores the restaurant contact number used for WhatsApp
+  reservations and order handoff.
+- `config/websiteMaintenance` controls the customer site's maintenance screen.
 
-The included `vercel.json` rewrites direct room URLs to the exported app entry
-point so Expo Router can render dynamic room routes. Set the same Firebase
-public environment values in the Vercel project before building, use the
-repository root as the project root, and set the build command to
-`npm run build:web` and the output directory to `website/dist`.
-
-Firebase Hosting is also configured to serve `website/dist` and rewrite direct
-`/room/**` requests to the app entry point. From the repository root, run
-`npm run build:web` followed by `firebase deploy --only hosting`.
-
-Run `npm run typecheck --workspace=website` from the root to type-check the
-site.
-
-Enable **Anonymous** under **Firebase Console → Authentication → Sign-in
-method** (or **Sign-in providers** in the updated console) to save booking
-requests directly to Firestore. If it is disabled, the guest can continue
-without an account and send the request through WhatsApp, but that request is
-not saved to Firestore unless the guest's messaging app successfully sends it.
-The displayed quote is calculated in the client and is not a server-verified
-price; staff must verify pricing before confirming a request.
+Menu prices are integer cents, and optional offer prices must be lower than
+the regular price. Table requests are sent to WhatsApp for staff confirmation;
+opening WhatsApp does not itself confirm a reservation.

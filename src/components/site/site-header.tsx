@@ -10,7 +10,6 @@ const links = [
   { href: "/", label: "Home" },
   { href: "/menu", label: "Menu" },
   { href: "/reserve", label: "Reserve" },
-  { href: "/rooms", label: "Stay" },
   { href: "/gallery", label: "Gallery" },
   { href: "/contact", label: "Contact" },
 ] as const;
@@ -54,7 +53,7 @@ export function SiteHeader() {
         {(isWide || menuOpen) && (
           <View style={[styles.navigation, isWide ? styles.navigationWide : styles.navigationCompact]}>
             {links.map(({ href, label }) => {
-              const active = pathname === href || (href === "/rooms" && pathname.startsWith("/room/"));
+              const active = pathname === href;
               return (
                 <Link key={href} href={href} asChild>
                   <Pressable

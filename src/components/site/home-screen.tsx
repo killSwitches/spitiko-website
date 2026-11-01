@@ -68,7 +68,7 @@ export function HomeScreen() {
             <View style={styles.photoCaption}>
               <Text style={styles.photoCaptionTitle}>Gather around</Text>
               <Text style={styles.photoCaptionBody}>
-                There’s always room at our table.
+                Everyone has a place at our table.
               </Text>
             </View>
           </View>
