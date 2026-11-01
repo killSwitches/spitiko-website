@@ -1,0 +1,72 @@
+:root {
+  --font-display:
+    Spline Sans, ui-sans-serif, system-ui, sans-serif, Apple Color Emoji, Segoe UI Emoji,
+    Segoe UI Symbol, Noto Color Emoji;
+  --font-mono:
+    ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, Liberation Mono, Courier New, monospace;
+  --font-rounded: 'SF Pro Rounded', 'Hiragino Maru Gothic ProN', Meiryo, 'MS PGothic', sans-serif;
+  --font-serif: Georgia, 'Times New Roman', serif;
+}
+
+html {
+  scroll-behavior: smooth;
+  background: #f7f8f3;
+}
+
+body {
+  margin: 0;
+  color: #293d2f;
+  font-family: var(--font-display);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+.date-time-field {
+  display: flex;
+  min-width: 0;
+  flex: 1;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.date-time-field__label {
+  color: #526150;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0;
+}
+
+.date-time-field__input {
+  box-sizing: border-box;
+  width: 100%;
+  min-height: 48px;
+  min-width: 0;
+  padding: 0 6px;
+  border: 1px solid #d5dccf;
+  border-radius: 9px;
+  color: #293d2f;
+  background: #fff;
+  font-size: 12px;
+}
+
+*:focus-visible {
+  outline: 2px solid #77935b;
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
