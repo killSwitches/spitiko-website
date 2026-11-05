@@ -11,6 +11,7 @@ import {
 
 import { MenuCard } from "@/components/site/menu-card";
 import { SiteLayout } from "@/components/site/site-layout";
+import { siteColors } from "@/constants/site-theme";
 import { useMenuItems } from "@/hooks/use-menu-items";
 
 const heroImage =
@@ -21,24 +22,25 @@ export function HomeScreen() {
   const { width } = useWindowDimensions();
   const isWide = width >= 760;
   const featured = items.filter((item) => item.featured || item.offer);
+  const photoItem =
+    items.find((item) => item.featured && item.imageUrl) ??
+    items.find((item) => item.imageUrl);
+  const photoSource = photoItem ? { uri: photoItem.imageUrl } : { uri: heroImage };
 
   return (
     <SiteLayout>
       <View style={styles.page}>
         <View style={[styles.hero, isWide && styles.heroWide]}>
           <View style={[styles.heroCopy, isWide && styles.heroCopyWide]}>
-            <View style={styles.openBadge}>
-              <View style={styles.openDot} />
-              <Text style={styles.openText}>A little taste of home</Text>
-            </View>
+            <Text style={styles.heroEyebrow}>SPITIKO · A TABLE FROM HOME</Text>
             <Text style={[styles.heroTitle, !isWide && styles.heroTitleCompact]}>
-              Come hungry.
-              {"\n"}Leave feeling{" "}
-              <Text style={styles.heroAccent}>at home.</Text>
+              Food for the
+              {"\n"}whole{" "}
+              <Text style={styles.heroAccent}>table.</Text>
             </Text>
             <Text style={styles.heroSubtitle}>
-              Good food, generous plates and the kind of welcome that brings
-              everyone to the table.
+              Comforting favourites, generous plates, and room for one more.
+              Find something for the table.
             </Text>
             <View style={styles.heroActions}>
               <Link href="/menu" asChild>
@@ -52,23 +54,20 @@ export function HomeScreen() {
                 </Pressable>
               </Link>
             </View>
-            <View style={styles.heroNote}>
-              <Text style={styles.heroNoteText}>
-                Made with care · Shared with everyone
-              </Text>
-            </View>
           </View>
           <View style={[styles.heroPhotoFrame, isWide && styles.heroPhotoFrameWide]}>
             <Image
-              source={{ uri: heroImage }}
+              source={photoSource}
               style={styles.heroPhoto}
               resizeMode="cover"
-              accessibilityLabel="A fresh meal prepared at Spitiko"
+              accessibilityLabel={photoItem?.name ?? "Food from the Spitiko menu"}
             />
             <View style={styles.photoCaption}>
-              <Text style={styles.photoCaptionTitle}>Gather around</Text>
+              <Text style={styles.photoCaptionTitle}>
+                {photoItem?.name ?? "A table from home"}
+              </Text>
               <Text style={styles.photoCaptionBody}>
-                Everyone has a place at our table.
+                {photoItem?.category ?? "Good food, shared together"}
               </Text>
             </View>
           </View>
@@ -77,22 +76,22 @@ export function HomeScreen() {
         <View style={styles.content}>
           <View style={styles.sectionHeading}>
             <View style={styles.headingCopy}>
-              <Text style={styles.sectionKicker}>THE GOOD STUFF</Text>
-              <Text style={styles.sectionTitle}>A few favourites</Text>
+              <Text style={styles.sectionKicker}>ON THE MENU</Text>
+              <Text style={styles.sectionTitle}>Worth a look</Text>
               <Text style={styles.sectionIntro}>
-                Fresh from our kitchen and ready for your table.
+                A few dishes to get you started.
               </Text>
             </View>
             <Link href="/menu" asChild>
               <Pressable accessibilityRole="link" style={styles.textLink}>
-                <Text style={styles.textLinkText}>See the full menu</Text>
+                <Text style={styles.textLinkText}>View the menu</Text>
               </Pressable>
             </Link>
           </View>
 
           {loading ? (
             <View style={styles.state}>
-              <ActivityIndicator color="#34553D" />
+              <ActivityIndicator color={siteColors.olive} />
               <Text style={styles.stateText}>Setting the table…</Text>
             </View>
           ) : error ? (
@@ -115,32 +114,30 @@ export function HomeScreen() {
             </View>
           ) : (
             <View style={styles.state}>
-              <Text style={styles.stateTitle}>The menu is on its way</Text>
+              <Text style={styles.stateTitle}>The menu is being prepared</Text>
               <Text style={styles.stateText}>
-                Our kitchen is getting everything ready. Come back soon to see
-                what’s cooking.
+                Check back soon to see what’s available.
               </Text>
             </View>
           )}
 
           <View style={[styles.invite, isWide && styles.inviteWide]}>
             <View style={styles.inviteCopy}>
-              <Text style={styles.inviteTitle}>Make it a meal together</Text>
+              <Text style={styles.inviteTitle}>Ready to order?</Text>
               <Text style={styles.inviteText}>
-                Choose your favourites, tell us how many to make, and send your
-                order straight to our team.
+                Choose your dishes and send your order directly to our team.
               </Text>
             </View>
             <Link href="/menu" asChild>
               <Pressable accessibilityRole="link" style={styles.inviteButton}>
-                <Text style={styles.inviteButtonText}>Start an order</Text>
+                <Text style={styles.inviteButtonText}>Browse the menu</Text>
               </Pressable>
             </Link>
           </View>
         </View>
         <View style={styles.footer}>
-          <Text style={styles.footerBrand}>Spitiko</Text>
-          <Text style={styles.footerText}>A table from home.</Text>
+          <Text style={styles.footerBrand}>spitiko</Text>
+          <Text style={styles.footerText}>A table from home</Text>
         </View>
       </View>
     </SiteLayout>
@@ -148,39 +145,28 @@ export function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  page: { backgroundColor: "#F7F8F3", minHeight: "100%" },
+  page: { backgroundColor: siteColors.paper, minHeight: "100%" },
   hero: {
     width: "100%",
     maxWidth: 1200,
     alignSelf: "center",
-    paddingHorizontal: 22,
-    paddingTop: 32,
-    paddingBottom: 38,
+    paddingHorizontal: 24,
+    paddingTop: 42,
+    paddingBottom: 46,
     gap: 30,
   },
   heroWide: {
     flexDirection: "row",
     alignItems: "center",
-    paddingTop: 48,
-    paddingBottom: 55,
-    gap: 44,
+    paddingTop: 58,
+    paddingBottom: 62,
+    gap: 52,
   },
   heroCopy: { flex: 1, paddingVertical: 8 },
   heroCopyWide: { paddingLeft: 22 },
-  openBadge: {
-    alignSelf: "flex-start",
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-    borderRadius: 20,
-    backgroundColor: "#E8EEE2",
-    paddingHorizontal: 13,
-    paddingVertical: 8,
-  },
-  openDot: { width: 7, height: 7, borderRadius: 5, backgroundColor: "#65824D" },
-  openText: { color: "#456044", fontSize: 12, fontWeight: "600" },
+  heroEyebrow: { color: siteColors.olive, fontSize: 11, fontWeight: "700", letterSpacing: 0.9 },
   heroTitle: {
-    color: "#263B2D",
+    color: siteColors.ink,
     fontSize: 58,
     lineHeight: 65,
     fontFamily: "Georgia",
@@ -188,9 +174,9 @@ const styles = StyleSheet.create({
     letterSpacing: -1.6,
   },
   heroTitleCompact: { fontSize: 43, lineHeight: 49, marginTop: 17 },
-  heroAccent: { color: "#77935B", fontStyle: "italic" },
+  heroAccent: { color: siteColors.olive, fontStyle: "italic" },
   heroSubtitle: {
-    color: "#667064",
+    color: siteColors.body,
     fontSize: 16,
     lineHeight: 25,
     maxWidth: 470,
@@ -200,8 +186,8 @@ const styles = StyleSheet.create({
   primaryButton: {
     minHeight: 49,
     justifyContent: "center",
-    borderRadius: 11,
-    backgroundColor: "#34553D",
+    borderRadius: 5,
+    backgroundColor: siteColors.oliveDark,
     paddingHorizontal: 20,
   },
   primaryButtonText: { color: "#FFFFFF", fontSize: 14, fontWeight: "700" },
@@ -209,43 +195,40 @@ const styles = StyleSheet.create({
     minHeight: 49,
     justifyContent: "center",
     borderWidth: 1,
-    borderColor: "#CBD4C5",
-    borderRadius: 11,
-    backgroundColor: "#FFFFFF",
+    borderColor: siteColors.border,
+    borderRadius: 5,
+    backgroundColor: siteColors.surface,
     paddingHorizontal: 20,
   },
-  reserveButtonText: { color: "#34553D", fontSize: 14, fontWeight: "700" },
-  heroNote: { borderTopWidth: 1, borderTopColor: "#E6E9E1", marginTop: 28, paddingTop: 15 },
-  heroNoteText: { color: "#7A8378", fontSize: 12 },
+  reserveButtonText: { color: siteColors.oliveDark, fontSize: 14, fontWeight: "700" },
   heroPhotoFrame: {
     height: 310,
     width: "100%",
     overflow: "hidden",
-    borderRadius: 20,
-    backgroundColor: "#DCE3D5",
+    borderRadius: 7,
+    backgroundColor: siteColors.oliveSoft,
     position: "relative",
   },
   heroPhotoFrameWide: { flex: 1 },
   heroPhoto: { width: "100%", height: "100%" },
   photoCaption: {
     position: "absolute",
-    left: 14,
-    bottom: 14,
-    right: 14,
-    borderRadius: 13,
-    backgroundColor: "rgba(255,255,255,0.94)",
-    paddingHorizontal: 15,
-    paddingVertical: 12,
+    left: 0,
+    bottom: 0,
+    right: 0,
+    backgroundColor: "rgba(255,254,250,0.94)",
+    paddingHorizontal: 14,
+    paddingVertical: 11,
   },
-  photoCaptionTitle: { color: "#293D2F", fontSize: 14, fontWeight: "700" },
-  photoCaptionBody: { color: "#758073", fontSize: 12, marginTop: 3 },
+  photoCaptionTitle: { color: siteColors.ink, fontSize: 14, fontWeight: "700" },
+  photoCaptionBody: { color: siteColors.muted, fontSize: 12, marginTop: 3 },
   content: {
     width: "100%",
     maxWidth: 1200,
     alignSelf: "center",
-    paddingHorizontal: 22,
-    paddingTop: 27,
-    paddingBottom: 48,
+    paddingHorizontal: 24,
+    paddingTop: 34,
+    paddingBottom: 56,
   },
   sectionHeading: {
     flexDirection: "row",
@@ -255,17 +238,17 @@ const styles = StyleSheet.create({
     gap: 14,
   },
   headingCopy: { flex: 1, minWidth: 220 },
-  sectionKicker: { color: "#73865C", fontSize: 11, fontWeight: "700" },
+  sectionKicker: { color: siteColors.olive, fontSize: 11, fontWeight: "700", letterSpacing: 0.7 },
   sectionTitle: {
-    color: "#263B2D",
+    color: siteColors.ink,
     fontSize: 30,
     lineHeight: 37,
     fontFamily: "Georgia",
     marginTop: 7,
   },
-  sectionIntro: { color: "#727C70", fontSize: 14, marginTop: 6 },
+  sectionIntro: { color: siteColors.body, fontSize: 14, marginTop: 6 },
   textLink: { minHeight: 40, justifyContent: "center", paddingHorizontal: 5 },
-  textLinkText: { color: "#34553D", fontSize: 13, fontWeight: "700" },
+  textLinkText: { color: siteColors.oliveDark, fontSize: 13, fontWeight: "700" },
   menuGrid: {
     flexDirection: "row",
     flexWrap: "wrap",
@@ -276,43 +259,43 @@ const styles = StyleSheet.create({
   state: {
     minHeight: 140,
     justifyContent: "center",
-    borderRadius: 16,
+    borderRadius: 8,
     borderWidth: 1,
-    borderColor: "#E1E5DA",
-    backgroundColor: "#FFFFFF",
+    borderColor: siteColors.border,
+    backgroundColor: siteColors.surface,
     padding: 22,
     marginTop: 20,
   },
-  stateTitle: { color: "#263B2D", fontSize: 18, fontWeight: "700", marginBottom: 7 },
-  stateText: { color: "#70796D", fontSize: 14, lineHeight: 22, marginTop: 10 },
-  errorText: { color: "#A74236", fontSize: 14, lineHeight: 22 },
+  stateTitle: { color: siteColors.ink, fontSize: 18, fontWeight: "700", marginBottom: 7 },
+  stateText: { color: siteColors.body, fontSize: 14, lineHeight: 22, marginTop: 10 },
+  errorText: { color: siteColors.danger, fontSize: 14, lineHeight: 22 },
   invite: {
     marginTop: 37,
-    borderRadius: 18,
-    backgroundColor: "#E8EEE2",
-    padding: 22,
+    borderRadius: 7,
+    backgroundColor: siteColors.oliveSoft,
+    padding: 24,
     gap: 18,
   },
   inviteWide: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", padding: 28 },
   inviteCopy: { flex: 1 },
-  inviteTitle: { color: "#2D4935", fontSize: 20, fontWeight: "700" },
-  inviteText: { color: "#647260", fontSize: 13, lineHeight: 20, marginTop: 7, maxWidth: 610 },
+  inviteTitle: { color: siteColors.oliveDark, fontSize: 20, fontWeight: "700" },
+  inviteText: { color: siteColors.body, fontSize: 13, lineHeight: 20, marginTop: 7, maxWidth: 610 },
   inviteButton: {
     minHeight: 46,
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "flex-start",
-    borderRadius: 10,
-    backgroundColor: "#34553D",
+    borderRadius: 5,
+    backgroundColor: siteColors.oliveDark,
     paddingHorizontal: 18,
   },
   inviteButtonText: { color: "#FFFFFF", fontSize: 13, fontWeight: "700" },
   footer: {
     alignItems: "center",
     borderTopWidth: 1,
-    borderTopColor: "#E4E8DE",
+    borderTopColor: siteColors.border,
     paddingVertical: 24,
   },
-  footerBrand: { color: "#34553D", fontSize: 20, fontWeight: "700" },
-  footerText: { color: "#7B8478", fontSize: 12, marginTop: 3 },
+  footerBrand: { color: siteColors.oliveDark, fontSize: 20, fontFamily: "Georgia" },
+  footerText: { color: siteColors.muted, fontSize: 12, marginTop: 3 },
 });

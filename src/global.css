@@ -10,12 +10,12 @@
 
 html {
   scroll-behavior: smooth;
-  background: #f7f8f3;
+  background: #f7f6f1;
 }
 
 body {
   margin: 0;
-  color: #293d2f;
+  color: #292b24;
   font-family: var(--font-display);
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -36,23 +36,23 @@ textarea {
 }
 
 .date-time-field__label {
-  color: #526150;
-  font-size: 10px;
+  color: #62665c;
+  font-size: 12px;
   font-weight: 700;
-  letter-spacing: 0;
+  letter-spacing: 0.1px;
 }
 
 .date-time-field__input {
   box-sizing: border-box;
   width: 100%;
-  min-height: 48px;
+  min-height: 46px;
   min-width: 0;
-  padding: 0 6px;
-  border: 1px solid #d5dccf;
-  border-radius: 9px;
-  color: #293d2f;
-  background: #fff;
-  font-size: 12px;
+  padding: 0 10px;
+  border: 1px solid #e3e1d8;
+  border-radius: 5px;
+  color: #292b24;
+  background: #fdfcf9;
+  font-size: 14px;
 }
 
 *:focus-visible {

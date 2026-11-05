@@ -5,6 +5,7 @@ import { Pressable, StyleSheet, Text, View, useWindowDimensions } from "react-na
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 import { useCart } from "@/context/cart-context";
+import { siteColors } from "@/constants/site-theme";
 
 const links = [
   { href: "/", label: "Home" },
@@ -29,7 +30,7 @@ export function SiteHeader() {
           <Link href="/" asChild>
             <Pressable accessibilityRole="link" style={styles.brand}>
               <View style={styles.brandMark}>
-                <BowlFood size={23} color="#FFFFFF" weight="fill" />
+                <BowlFood size={21} color="#FFFFFF" weight="regular" />
               </View>
               <View>
                 <Text style={styles.brandName}>spitiko</Text>
@@ -46,7 +47,7 @@ export function SiteHeader() {
               hitSlop={8}
               style={({ pressed }) => [styles.menuToggle, pressed && styles.menuTogglePressed]}
             >
-              {menuOpen ? <X size={24} color="#1C1916" /> : <List size={24} color="#1C1916" />}
+              {menuOpen ? <X size={24} color={siteColors.ink} /> : <List size={24} color={siteColors.ink} />}
             </Pressable>
           )}
         </View>
@@ -86,27 +87,27 @@ export function SiteHeader() {
 }
 
 const styles = StyleSheet.create({
-  header: { backgroundColor: "rgba(255,255,255,0.97)", borderBottomWidth: 1, borderBottomColor: "#E6E9E1", zIndex: 5 },
+  header: { backgroundColor: siteColors.paper, borderBottomWidth: 1, borderBottomColor: siteColors.border, zIndex: 5 },
   inner: { width: "100%", maxWidth: 1200, alignSelf: "center", paddingHorizontal: 20 },
   innerWide: { minHeight: 78, flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: 24 },
   innerCompact: { paddingTop: 4, paddingBottom: 8 },
   topRow: { minHeight: 54, flexDirection: "row", alignItems: "center", justifyContent: "space-between" },
   topRowCompact: { width: "100%" },
   brand: { flexDirection: "row", alignItems: "center", gap: 10 },
-  brandMark: { width: 42, height: 42, alignItems: "center", justifyContent: "center", borderRadius: 14, backgroundColor: "#34553D" },
-  brandName: { color: "#293D2F", fontSize: 22, fontWeight: "700", letterSpacing: -0.5 },
-  brandPlace: { color: "#718166", fontSize: 9, fontWeight: "700", marginTop: 2, letterSpacing: 0.6 },
+  brandMark: { width: 38, height: 38, alignItems: "center", justifyContent: "center", borderRadius: 8, backgroundColor: siteColors.olive },
+  brandName: { color: siteColors.ink, fontSize: 23, fontFamily: "Georgia" },
+  brandPlace: { color: siteColors.muted, fontSize: 9, fontWeight: "600", marginTop: 2, letterSpacing: 0.8 },
   menuToggle: { width: 44, height: 44, alignItems: "center", justifyContent: "center", borderRadius: 999 },
-  menuTogglePressed: { backgroundColor: "#EDE8E0" },
+  menuTogglePressed: { backgroundColor: siteColors.oliveSoft },
   navigation: { flexDirection: "row", alignItems: "center", gap: 12, paddingVertical: 8 },
   navigationWide: { flex: 1, justifyContent: "flex-end" },
-  navigationCompact: { flexDirection: "column", alignItems: "stretch", borderTopWidth: 1, borderTopColor: "rgba(28,25,22,0.10)", marginTop: 8, paddingTop: 10, paddingBottom: 4 },
-  navLink: { minHeight: 38, justifyContent: "center", paddingHorizontal: 13, borderRadius: 999 },
-  navLinkCompact: { minHeight: 46, paddingHorizontal: 14, borderRadius: 12 },
-  navLinkActive: { backgroundColor: "#E8EEE2" },
-  navText: { color: "#526150", fontSize: 14, fontWeight: "500" },
-  navTextActive: { color: "#34553D", fontWeight: "700" },
-  cartButton: { minHeight: 42, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 8, backgroundColor: "#34553D", borderRadius: 11, marginLeft: 5, paddingHorizontal: 15 },
+  navigationCompact: { flexDirection: "column", alignItems: "stretch", borderTopWidth: 1, borderTopColor: siteColors.border, marginTop: 8, paddingTop: 10, paddingBottom: 4 },
+  navLink: { minHeight: 38, justifyContent: "center", paddingHorizontal: 13, borderRadius: 6 },
+  navLinkCompact: { minHeight: 46, paddingHorizontal: 14, borderRadius: 6 },
+  navLinkActive: { backgroundColor: siteColors.oliveSoft },
+  navText: { color: siteColors.body, fontSize: 14, fontWeight: "500" },
+  navTextActive: { color: siteColors.oliveDark, fontWeight: "700" },
+  cartButton: { minHeight: 42, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 8, backgroundColor: siteColors.oliveDark, borderRadius: 6, marginLeft: 5, paddingHorizontal: 15 },
   searchButtonCompact: { minHeight: 46, alignItems: "center", marginLeft: 0, marginTop: 6 },
   searchButtonText: { color: "#FFFFFF", fontSize: 14, fontWeight: "600" },
 });

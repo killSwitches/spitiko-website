@@ -9,6 +9,7 @@ import {
 
 import { MenuCard } from "@/components/site/menu-card";
 import { SiteLayout, siteStyles } from "@/components/site/site-layout";
+import { siteColors } from "@/constants/site-theme";
 import { useMenuItems } from "@/hooks/use-menu-items";
 
 export function MenuScreen() {
@@ -26,10 +27,10 @@ export function MenuScreen() {
   return (
     <SiteLayout>
       <View style={siteStyles.content}>
-        <Text style={siteStyles.eyebrow}>MADE FRESH, SHARED WITH LOVE</Text>
-        <Text style={siteStyles.title}>The Spitiko menu</Text>
+        <Text style={siteStyles.eyebrow}>FROM OUR KITCHEN</Text>
+        <Text style={siteStyles.title}>What’s cooking</Text>
         <Text style={siteStyles.subtitle}>
-          From the first bite to the last, find something made for your table.
+          Browse the menu and choose something for the table.
         </Text>
 
         {categories.length > 1 ? (
@@ -55,7 +56,7 @@ export function MenuScreen() {
 
         {loading ? (
           <View style={siteStyles.state}>
-            <ActivityIndicator color="#34553D" />
+            <ActivityIndicator color={siteColors.olive} />
             <Text style={siteStyles.stateText}>Loading today’s menu…</Text>
           </View>
         ) : error ? (
@@ -93,14 +94,14 @@ const styles = StyleSheet.create({
   chip: {
     minHeight: 40,
     justifyContent: "center",
-    borderRadius: 22,
+    borderRadius: 5,
     borderWidth: 1,
-    borderColor: "#D8DCCF",
-    backgroundColor: "#FFFFFF",
+    borderColor: siteColors.border,
+    backgroundColor: siteColors.surface,
     paddingHorizontal: 16,
   },
-  chipSelected: { backgroundColor: "#34553D", borderColor: "#34553D" },
-  chipText: { color: "#4D5C4F", fontSize: 13, fontWeight: "600" },
+  chipSelected: { backgroundColor: siteColors.oliveDark, borderColor: siteColors.oliveDark },
+  chipText: { color: siteColors.body, fontSize: 13, fontWeight: "600" },
   chipTextSelected: { color: "#FFFFFF" },
   grid: {
     flexDirection: "row",
@@ -110,5 +111,5 @@ const styles = StyleSheet.create({
     gap: 18,
     marginTop: 24,
   },
-  emptyTitle: { color: "#233528", fontSize: 17, fontWeight: "700", marginBottom: 8 },
+  emptyTitle: { color: siteColors.ink, fontSize: 17, fontWeight: "700", marginBottom: 8 },
 });

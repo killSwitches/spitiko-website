@@ -1,6 +1,7 @@
 import DateTimePicker, { type DateTimePickerEvent } from "@react-native-community/datetimepicker";
 import { useState } from "react";
 import { Platform, Pressable, StyleSheet, Text, TextInput, View } from "react-native";
+import { siteColors } from "@/constants/site-theme";
 
 interface DateTimeFieldProps {
   label: string;
@@ -72,7 +73,7 @@ export function DateTimeField({ label, value, onChange, minimumValue }: DateTime
 }
 
 const styles = StyleSheet.create({
-  label: { color: "#4A4540", fontSize: 13, fontWeight: "600", marginBottom: 7 },
-  input: { minHeight: 48, justifyContent: "center", borderWidth: 1, borderColor: "#DED6CC", borderRadius: 12, backgroundColor: "#F7F3EE", paddingHorizontal: 12, paddingVertical: 10 },
-  value: { color: "#1C1916", fontSize: 14 },
+  label: { color: siteColors.body, fontSize: 13, fontWeight: "600", marginBottom: 7 },
+  input: { minHeight: 48, justifyContent: "center", borderWidth: 1, borderColor: siteColors.border, borderRadius: 5, backgroundColor: siteColors.input, paddingHorizontal: 12, paddingVertical: 10 },
+  value: { color: siteColors.ink, fontSize: 14 },
 });

@@ -14,6 +14,7 @@ import {
 
 import { DateTimeField } from "@/components/date-time-field";
 import { SiteLayout, siteStyles } from "@/components/site/site-layout";
+import { siteColors } from "@/constants/site-theme";
 import { useWhatsAppNumber } from "@/hooks/use-whatsapp-number";
 import { buildWhatsAppUrl } from "@/lib/domain";
 
@@ -88,28 +89,28 @@ export default function ReserveScreen() {
       <View style={siteStyles.content}>
         <Link href="/" asChild>
           <Pressable accessibilityRole="link" style={styles.backLink}>
-            <ArrowLeft size={16} color="#34553D" />
+            <ArrowLeft size={16} color={siteColors.olive} />
             <Text style={styles.backText}>Back to Spitiko</Text>
           </Pressable>
         </Link>
         <View style={[styles.layout, wide && styles.layoutWide]}>
           <View style={styles.intro}>
             <View style={styles.iconCircle}>
-              <CalendarBlank size={23} color="#34553D" weight="fill" />
+              <CalendarBlank size={23} color={siteColors.olive} weight="regular" />
             </View>
-            <Text style={styles.kicker}>SAVE A PLACE AT OUR TABLE</Text>
-            <Text style={styles.title}>We’ll keep a seat warm.</Text>
+            <Text style={styles.kicker}>RESERVATIONS</Text>
+            <Text style={styles.title}>Request a table</Text>
             <Text style={styles.copy}>
-              Share a few details and we’ll open WhatsApp with your reservation
-              request. Our team will confirm your table directly.
+              Choose a date, time, and group size. We’ll send your request to our
+              team on WhatsApp for confirmation.
             </Text>
             <Text style={styles.confirmNote}>
-              Your table is confirmed once our team replies.
+              Your table is booked once our team confirms.
             </Text>
           </View>
 
           <View style={styles.form}>
-            <Text style={styles.formTitle}>Request a table</Text>
+            <Text style={styles.formTitle}>Reservation details</Text>
             <View style={[styles.formRow, !wide && styles.formColumn]}>
               <View style={styles.field}>
                 <Text style={styles.label}>Your name</Text>
@@ -143,7 +144,7 @@ export default function ReserveScreen() {
             <View style={styles.field}>
               <Text style={styles.label}>Number of guests</Text>
               <View style={styles.guestBox}>
-                <Users size={18} color="#61755D" />
+                <Users size={18} color={siteColors.olive} />
                 <Text style={styles.guestLabel}>
                   {guestCount} {guestCount === 1 ? "guest" : "guests"}
                 </Text>
@@ -211,33 +212,33 @@ export default function ReserveScreen() {
 
 const styles = StyleSheet.create({
   backLink: { flexDirection: "row", alignItems: "center", gap: 7, minHeight: 40, alignSelf: "flex-start" },
-  backText: { color: "#34553D", fontSize: 13, fontWeight: "700" },
+  backText: { color: siteColors.oliveDark, fontSize: 13, fontWeight: "700" },
   layout: { gap: 25, marginTop: 16 },
   layoutWide: { flexDirection: "row", alignItems: "flex-start", gap: 44, marginTop: 26 },
   intro: { flex: 0.85, paddingVertical: 12 },
-  iconCircle: { width: 48, height: 48, alignItems: "center", justifyContent: "center", borderRadius: 16, backgroundColor: "#E8EEE2" },
-  kicker: { color: "#73865C", fontSize: 11, fontWeight: "700", marginTop: 21 },
-  title: { color: "#263B2D", fontSize: 36, lineHeight: 42, fontFamily: "Georgia", marginTop: 8 },
-  copy: { color: "#6E796C", fontSize: 15, lineHeight: 23, marginTop: 12 },
-  confirmNote: { color: "#4D684D", fontSize: 13, fontWeight: "600", marginTop: 22 },
-  form: { flex: 1.15, borderWidth: 1, borderColor: "#E3E7DE", borderRadius: 16, backgroundColor: "#FFFFFF", padding: 18 },
-  formTitle: { color: "#293D2F", fontSize: 19, fontWeight: "700", marginBottom: 9 },
+  iconCircle: { width: 46, height: 46, alignItems: "center", justifyContent: "center", borderRadius: 7, backgroundColor: siteColors.oliveSoft },
+  kicker: { color: siteColors.olive, fontSize: 11, fontWeight: "700", letterSpacing: 0.6, marginTop: 21 },
+  title: { color: siteColors.ink, fontSize: 36, lineHeight: 42, fontFamily: "Georgia", marginTop: 8 },
+  copy: { color: siteColors.body, fontSize: 15, lineHeight: 23, marginTop: 12 },
+  confirmNote: { color: siteColors.olive, fontSize: 13, fontWeight: "600", marginTop: 22 },
+  form: { flex: 1.15, borderWidth: 1, borderColor: siteColors.border, borderRadius: 8, backgroundColor: siteColors.surface, padding: 20 },
+  formTitle: { color: siteColors.ink, fontSize: 19, fontWeight: "700", marginBottom: 9 },
   formRow: { flexDirection: "row", gap: 12 },
   formColumn: { flexDirection: "column" },
   field: { flex: 1, minWidth: 0, marginTop: 13 },
-  label: { color: "#4D5C4F", fontSize: 12, fontWeight: "600", marginBottom: 6 },
-  input: { minHeight: 46, borderWidth: 1, borderColor: "#DDE3D8", borderRadius: 9, backgroundColor: "#FBFCFA", color: "#293D2F", fontSize: 14, paddingHorizontal: 11, paddingVertical: 10 },
+  label: { color: siteColors.body, fontSize: 12, fontWeight: "600", marginBottom: 6 },
+  input: { minHeight: 46, borderWidth: 1, borderColor: siteColors.border, borderRadius: 5, backgroundColor: siteColors.input, color: siteColors.ink, fontSize: 14, paddingHorizontal: 11, paddingVertical: 10 },
   notes: { minHeight: 85 },
-  guestBox: { minHeight: 48, flexDirection: "row", alignItems: "center", gap: 10, borderWidth: 1, borderColor: "#DDE3D8", borderRadius: 9, backgroundColor: "#FBFCFA", paddingHorizontal: 11 },
-  guestLabel: { flex: 1, color: "#293D2F", fontSize: 13, fontWeight: "600" },
+  guestBox: { minHeight: 48, flexDirection: "row", alignItems: "center", gap: 10, borderWidth: 1, borderColor: siteColors.border, borderRadius: 5, backgroundColor: siteColors.input, paddingHorizontal: 11 },
+  guestLabel: { flex: 1, color: siteColors.ink, fontSize: 13, fontWeight: "600" },
   steps: { flexDirection: "row", gap: 7 },
-  step: { width: 31, height: 31, alignItems: "center", justifyContent: "center", borderRadius: 17, backgroundColor: "#E8EEE2" },
+  step: { width: 31, height: 31, alignItems: "center", justifyContent: "center", borderRadius: 5, backgroundColor: siteColors.oliveSoft },
   stepDisabled: { opacity: 0.4 },
-  stepText: { color: "#34553D", fontSize: 20, lineHeight: 24, fontWeight: "600" },
-  submit: { minHeight: 48, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 8, borderRadius: 10, backgroundColor: "#34553D", paddingHorizontal: 14, marginTop: 18 },
+  stepText: { color: siteColors.oliveDark, fontSize: 20, lineHeight: 24, fontWeight: "600" },
+  submit: { minHeight: 48, flexDirection: "row", alignItems: "center", justifyContent: "center", gap: 8, borderRadius: 5, backgroundColor: siteColors.oliveDark, paddingHorizontal: 14, marginTop: 18 },
   submitText: { color: "#FFFFFF", fontSize: 13, fontWeight: "700", textAlign: "center" },
   disabled: { opacity: 0.5 },
-  error: { color: "#A74236", fontSize: 12, lineHeight: 18, marginTop: 13 },
-  feedback: { color: "#456044", fontSize: 12, lineHeight: 18, marginTop: 13 },
-  privacy: { color: "#7A8378", fontSize: 11, lineHeight: 17, marginTop: 10 },
+  error: { color: siteColors.danger, fontSize: 12, lineHeight: 18, marginTop: 13 },
+  feedback: { color: siteColors.olive, fontSize: 12, lineHeight: 18, marginTop: 13 },
+  privacy: { color: siteColors.muted, fontSize: 11, lineHeight: 17, marginTop: 10 },
 });

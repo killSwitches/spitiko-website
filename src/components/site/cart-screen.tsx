@@ -13,6 +13,7 @@ import {
 } from "react-native";
 
 import { SiteLayout, siteStyles } from "@/components/site/site-layout";
+import { siteColors } from "@/constants/site-theme";
 import { useCart } from "@/context/cart-context";
 import { useMenuItems } from "@/hooks/use-menu-items";
 import { useWhatsAppNumber } from "@/hooks/use-whatsapp-number";
@@ -98,7 +99,7 @@ export function CartScreen() {
   return (
     <SiteLayout>
       <View style={siteStyles.content}>
-        <Text style={siteStyles.eyebrow}>YOUR TABLE</Text>
+        <Text style={siteStyles.eyebrow}>YOUR ORDER</Text>
         <Text style={siteStyles.title}>Your order</Text>
         <Text style={siteStyles.subtitle}>
           Check your dishes and send your order to our team.
@@ -106,7 +107,7 @@ export function CartScreen() {
 
         {loading && cart.lines.length ? (
           <View style={styles.loading}>
-            <ActivityIndicator color="#34553D" />
+            <ActivityIndicator color={siteColors.olive} />
             <Text style={styles.muted}>Checking today’s menu…</Text>
           </View>
         ) : null}
@@ -152,9 +153,9 @@ export function CartScreen() {
                         style={styles.stepButton}
                       >
                         {quantity === 1 ? (
-                          <Trash size={15} color="#456044" />
+                          <Trash size={15} color={siteColors.olive} />
                         ) : (
-                          <Minus size={15} color="#456044" />
+                          <Minus size={15} color={siteColors.olive} />
                         )}
                       </Pressable>
                       <Text style={styles.quantity}>{quantity}</Text>
@@ -170,7 +171,7 @@ export function CartScreen() {
                         }}
                         style={[styles.stepButton, !currentItem && styles.disabled]}
                       >
-                        <Plus size={15} color="#456044" />
+                        <Plus size={15} color={siteColors.olive} />
                       </Pressable>
                     </View>
                     <Text style={styles.lineTotal}>
@@ -270,9 +271,9 @@ const styles = StyleSheet.create({
   lines: {
     flex: 1.5,
     borderWidth: 1,
-    borderColor: "#E3E7DE",
-    borderRadius: 16,
-    backgroundColor: "#FFFFFF",
+    borderColor: siteColors.border,
+    borderRadius: 8,
+    backgroundColor: siteColors.surface,
     paddingHorizontal: 17,
   },
   line: {
@@ -280,13 +281,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 12,
     borderBottomWidth: 1,
-    borderBottomColor: "#EDF0E9",
+    borderBottomColor: siteColors.border,
     paddingVertical: 17,
   },
   lineCopy: { flex: 1, minWidth: 100 },
-  itemName: { color: "#293D2F", fontSize: 15, fontWeight: "700" },
-  itemPrice: { color: "#758073", fontSize: 12, marginTop: 5 },
-  unavailable: { color: "#A74236", fontSize: 11, lineHeight: 16, marginTop: 5 },
+  itemName: { color: siteColors.ink, fontSize: 15, fontWeight: "700" },
+  itemPrice: { color: siteColors.muted, fontSize: 12, marginTop: 5 },
+  unavailable: { color: siteColors.danger, fontSize: 11, lineHeight: 16, marginTop: 5 },
   controls: { flexDirection: "row", alignItems: "center", gap: 9 },
   stepButton: {
     width: 33,
@@ -294,71 +295,71 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 18,
-    backgroundColor: "#EFF3EB",
+    backgroundColor: siteColors.oliveSoft,
   },
   disabled: { opacity: 0.4 },
-  quantity: { color: "#293D2F", fontSize: 13, fontWeight: "700", minWidth: 14, textAlign: "center" },
-  lineTotal: { color: "#293D2F", fontSize: 13, fontWeight: "700", minWidth: 64, textAlign: "right" },
+  quantity: { color: siteColors.ink, fontSize: 13, fontWeight: "700", minWidth: 14, textAlign: "center" },
+  lineTotal: { color: siteColors.ink, fontSize: 13, fontWeight: "700", minWidth: 64, textAlign: "right" },
   summary: {
     flex: 1,
     minWidth: 280,
     alignSelf: "flex-start",
     borderWidth: 1,
-    borderColor: "#E3E7DE",
-    borderRadius: 16,
-    backgroundColor: "#FFFFFF",
+    borderColor: siteColors.border,
+    borderRadius: 8,
+    backgroundColor: siteColors.surface,
     padding: 18,
   },
   summaryHeading: { flexDirection: "row", alignItems: "center", justifyContent: "space-between", gap: 8 },
-  summaryTitle: { color: "#293D2F", fontSize: 18, fontWeight: "700" },
+  summaryTitle: { color: siteColors.ink, fontSize: 18, fontWeight: "700" },
   clearButton: { minHeight: 34, justifyContent: "center", paddingHorizontal: 7 },
-  clearText: { color: "#758073", fontSize: 12, fontWeight: "600" },
+  clearText: { color: siteColors.muted, fontSize: 12, fontWeight: "600" },
   totalRow: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     borderTopWidth: 1,
-    borderTopColor: "#EDF0E9",
+    borderTopColor: siteColors.border,
     marginTop: 17,
     paddingTop: 14,
   },
-  totalPrice: { color: "#293D2F", fontSize: 17, fontWeight: "700" },
-  muted: { color: "#758073", fontSize: 13, lineHeight: 20 },
-  note: { color: "#7C857A", fontSize: 12, lineHeight: 18, marginTop: 10, marginBottom: 16 },
-  fieldLabel: { color: "#435547", fontSize: 12, fontWeight: "600", marginTop: 12, marginBottom: 6 },
+  totalPrice: { color: siteColors.ink, fontSize: 17, fontWeight: "700" },
+  muted: { color: siteColors.body, fontSize: 13, lineHeight: 20 },
+  note: { color: siteColors.muted, fontSize: 12, lineHeight: 18, marginTop: 10, marginBottom: 16 },
+  fieldLabel: { color: siteColors.body, fontSize: 12, fontWeight: "600", marginTop: 12, marginBottom: 6 },
   input: {
     minHeight: 45,
     borderWidth: 1,
-    borderColor: "#DDE3D8",
-    borderRadius: 9,
-    backgroundColor: "#FBFCFA",
-    color: "#293D2F",
+    borderColor: siteColors.border,
+    borderRadius: 5,
+    backgroundColor: siteColors.input,
+    color: siteColors.ink,
     fontSize: 14,
     paddingHorizontal: 11,
   },
-  feedback: { color: "#A74236", fontSize: 12, lineHeight: 18, marginTop: 12 },
+  feedback: { color: siteColors.danger, fontSize: 12, lineHeight: 18, marginTop: 12 },
   primaryButton: {
     minHeight: 48,
     alignItems: "center",
     justifyContent: "center",
     alignSelf: "flex-start",
-    borderRadius: 10,
-    backgroundColor: "#34553D",
+    borderRadius: 5,
+    backgroundColor: siteColors.oliveDark,
     paddingHorizontal: 17,
     marginTop: 17,
   },
   primaryButtonText: { color: "#FFFFFF", fontSize: 13, fontWeight: "700" },
   disabledButton: { opacity: 0.45 },
-  unavailableNote: { color: "#A74236", fontSize: 11, lineHeight: 16, marginTop: 8 },
+  unavailableNote: { color: siteColors.danger, fontSize: 11, lineHeight: 16, marginTop: 8 },
   empty: {
     alignItems: "flex-start",
     borderWidth: 1,
-    borderColor: "#E3E7DE",
-    borderRadius: 16,
-    backgroundColor: "#FFFFFF",
+    borderColor: siteColors.border,
+    borderRadius: 8,
+    backgroundColor: siteColors.surface,
     padding: 24,
     marginTop: 28,
   },
-  emptyTitle: { color: "#293D2F", fontSize: 20, fontWeight: "700", marginBottom: 8 },
+  emptyTitle: { color: siteColors.ink, fontSize: 20, fontWeight: "700", marginBottom: 8 },
   loading: { flexDirection: "row", alignItems: "center", gap: 10, marginTop: 20 },
 });

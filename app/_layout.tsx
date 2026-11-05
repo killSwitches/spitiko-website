@@ -15,9 +15,10 @@ import { SafeAreaProvider } from 'react-native-safe-area-context';
 import type { MaintenanceConfig } from '@/lib/domain';
 import { db, firebaseConfigError } from '@/lib/firebase';
 import { CartProvider } from '@/context/cart-context';
+import { siteColors } from '@/constants/site-theme';
 
-const ink = '#1C1916';
-const gold = '#A9834B';
+const ink = '#292B24';
+const gold = '#6F8067';
 
 function SiteGate() {
   const [attempt, setAttempt] = useState(0);
@@ -87,7 +88,7 @@ function SiteGate() {
 
   return (
     <CartProvider>
-      <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: '#F7F8F3' } }} />
+      <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: siteColors.paper } }} />
     </CartProvider>
   );
 }
@@ -107,13 +108,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     padding: 28,
-    backgroundColor: '#f5f7fb',
+    backgroundColor: siteColors.paper,
   },
-  eyebrow: { color: gold, fontSize: 12, fontWeight: '700', letterSpacing: 0, textAlign: 'center' },
+  eyebrow: { color: gold, fontSize: 11, fontWeight: '700', letterSpacing: 0.7, textAlign: 'center' },
   maintenanceTitle: { color: ink, fontSize: 36, lineHeight: 44, fontWeight: '600', textAlign: 'center', marginTop: 18, maxWidth: 640 },
-  body: { color: '#4A4540', fontSize: 16, lineHeight: 26, textAlign: 'center', marginTop: 12, maxWidth: 520 },
+  body: { color: '#62665C', fontSize: 16, lineHeight: 26, textAlign: 'center', marginTop: 12, maxWidth: 520 },
   muted: { color: '#8C8078', marginTop: 14 },
   support: { color: '#8C8078', fontSize: 13, marginTop: 48 },
-  primaryButton: { backgroundColor: '#006ce4', paddingVertical: 15, paddingHorizontal: 24, borderRadius: 5, marginTop: 24 },
+  primaryButton: { backgroundColor: '#334A37', paddingVertical: 14, paddingHorizontal: 22, borderRadius: 5, marginTop: 24 },
   primaryText: { color: '#FFFFFF', fontWeight: '700' },
 });
